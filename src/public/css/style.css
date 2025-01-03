@@ -3,7 +3,8 @@ body {
     align-items: center;
     text-align: center;
 }
-.img-name { 
-    with: 300px;
+
+.img-name {
+    width: 300px;
     height: 300px;
 }

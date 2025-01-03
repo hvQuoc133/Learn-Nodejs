@@ -1,14 +1,19 @@
+const connection = require('../config/database');
 
 const getHomepage = (req, res) => {
-    //process data
-    //call model
-    res.send('Hello World! & Nodemon');
+    return res.render('home.ejs');
 }
 
 const getHelloNodejs = (req, res) => {
     res.render('sample.ejs');
 }
 
+const postCreateUser = (req, res) => {
+    console.log(req.body);
+    res.send('Create a new user');
+}
+
+
 module.exports = {
-    getHomepage, getHelloNodejs
+    getHomepage, getHelloNodejs, postCreateUser
 }

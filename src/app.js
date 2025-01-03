@@ -8,20 +8,22 @@ const app = express();
 const port = process.env.PORT || 3000;
 const hostname = process.env.HOST_NAME;
 
+//config request body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //config tempalte engine
 configViewEngine(app);
 
 //routes init
 app.use('/', webRouter);
 
-//
-
 //simple query
-connection.query(
-  'SELECT * FROM Users u',
-   function(err, results, fields) {
-    console.log(">>> Check results: ", results);
-});
+// connection.query(
+//   'SELECT * FROM Users u',
+//    function(err, results, fields) {
+//     console.log(">>> Check results: ", results);
+// });
 
 
 app.listen(port, hostname, () => {

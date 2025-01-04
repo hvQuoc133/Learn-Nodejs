@@ -9,8 +9,16 @@ const getHelloNodejs = (req, res) => {
 }
 
 const postCreateUser = (req, res) => {
-    console.log(req.body);
-    res.send('Create a new user');
+
+    let { email, name, city } = req.body;
+
+    connection.query(
+        'INSERT INTO Users (email, name, city) VALUES (?, ?, ?)',
+        [email, name, city],
+        (error, results) => {
+            res.send('Create user successfully');
+
+        });
 }
 
 

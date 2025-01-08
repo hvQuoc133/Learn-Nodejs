@@ -1,6 +1,6 @@
 const connection = require('../config/database');
-const { get } = require('../routes/web');
-const { getAllUser, getUserById, updateUserById } = require('../services/CRUDService');
+// const { get } = require('../routes/web');
+const { getAllUser, getUserById, updateUserById, deleteUserById } = require('../services/CRUDService');
 
 const getHomepage = async (req, res) => {
     let results = await getAllUser();
@@ -19,7 +19,8 @@ const postCreateUser = async (req, res) => {
         'INSERT INTO Users (email, name, city) VALUES (?, ?, ?)',
         [email, name, city]
     );
-    res.send('Create user successfully');
+    // res.send('Create user successfully');
+    res.redirect('/');
 }
 
 const getCreatePage = (req, res) => {
@@ -39,9 +40,22 @@ const postUpdateUser = async (req, res) => {
     res.redirect('/');
 }
 
+const postDeleteUser = async (req, res) => {
+    const userId = req.params.id;
+    let user = await getUserById(userId);
+    res.render('delete.ejs', {userEdit: user});
+}
+
+const postHandleDeleteUser = async (req, res) => {
+    let { userId } = req.body;
+    await deleteUserById(userId);
+    res.redirect('/');
+}
+
 
 module.exports = {
     getHomepage, getHelloNodejs,
     postCreateUser, getCreatePage,
-    getUpdatePage, postUpdateUser
+    getUpdatePage, postUpdateUser,
+    postDeleteUser, postHandleDeleteUser
 }
